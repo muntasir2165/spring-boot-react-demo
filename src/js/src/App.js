@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Container from './Container';
 import './App.css';
 import { getAllStudents } from './client';
 import { Table } from 'antd';
@@ -54,7 +55,14 @@ class App extends Component {
       ];
 
       return (
-        <Table dataSource={students} columns={columns} rowKey='studentId' />
+        <Container>
+          <Table
+            dataSource={students}
+            columns={columns}
+            pagination={false}
+            rowKey='studentId'
+          />
+        </Container>
       );
     }
 
