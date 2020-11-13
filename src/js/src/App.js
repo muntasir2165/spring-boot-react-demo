@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Container from './Container';
 import './App.css';
 import { getAllStudents } from './client';
-import { Table } from 'antd';
+import { Avatar, Table } from 'antd';
 
 class App extends Component {
   state = {
@@ -27,6 +27,17 @@ class App extends Component {
 
     if (students && students.length) {
       const columns = [
+        {
+          title: '',
+          key: 'avatar',
+          render: (text, student) => (
+            <Avatar size='large'>{`${student.firstName
+              .charAt(0)
+              .toUpperCase()} ${student.lastName
+              .charAt(0)
+              .toUpperCase()}`}</Avatar>
+          ),
+        },
         {
           title: 'Student Id',
           dataIndex: 'studentId',
