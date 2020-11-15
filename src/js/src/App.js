@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Container from './Container';
 import Footer from './Footer';
+import AddStudentForm from './forms/AddStudentForm';
 import './App.css';
 import { getAllStudents } from './client';
 import { Avatar, Modal, Spin, Table } from 'antd';
@@ -103,6 +104,7 @@ class App extends Component {
             width={1000}
           >
             <h1>Hello Modal with Antd</h1>
+            <AddStudentForm />
           </Modal>
           <Footer
             numberOfStudents={students.length}
