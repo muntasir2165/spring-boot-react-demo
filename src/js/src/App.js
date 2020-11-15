@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Container from './Container';
+import Footer from './Footer';
 import './App.css';
 import { getAllStudents } from './client';
 import { Avatar, Spin, Table } from 'antd';
@@ -88,6 +89,7 @@ class App extends Component {
             pagination={false}
             rowKey='studentId'
           />
+          <Footer numberOfStudents={students.length}></Footer>
         </Container>
       );
     }
