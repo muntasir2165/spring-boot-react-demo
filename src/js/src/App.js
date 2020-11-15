@@ -103,7 +103,6 @@ class App extends Component {
             onCancel={this.closeAddStudentModal}
             width={1000}
           >
-            <h1>Hello Modal with Antd</h1>
             <AddStudentForm />
           </Modal>
           <Footer
