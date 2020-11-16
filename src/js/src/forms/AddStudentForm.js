@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { Formik } from 'formik';
-import { Button, Input } from 'antd';
+import { Button, Input, Tag } from 'antd';
 
 const inputBottomMargin = { marginBottom: '10px' };
+const tagStyle = {
+  backgroundColor: '#f50',
+  color: 'white',
+  ...inputBottomMargin,
+};
 
 class AddStudentForm extends Component {
   render() {
@@ -64,7 +69,9 @@ class AddStudentForm extends Component {
               placeholder='First name. E.g John'
               value={values.firstName}
             />
-            {errors.firstName && touched.firstName && errors.firstName}
+            {errors.firstName && touched.firstName && (
+              <Tag style={tagStyle}>{errors.firstName}</Tag>
+            )}
             <Input
               style={inputBottomMargin}
               name='lastName'
@@ -73,7 +80,9 @@ class AddStudentForm extends Component {
               placeholder='Last name. E.g Jones'
               value={values.lastName}
             />
-            {errors.lastName && touched.lastName && errors.lastName}
+            {errors.lastName && touched.lastName && (
+              <Tag style={tagStyle}>{errors.lastName}</Tag>
+            )}
             <Input
               style={inputBottomMargin}
               name='email'
@@ -83,7 +92,9 @@ class AddStudentForm extends Component {
               placeholder='Email. E.g example@gmail.com'
               value={values.email}
             />
-            {errors.email && touched.email && errors.email}
+            {errors.email && touched.email && (
+              <Tag style={tagStyle}>{errors.email}</Tag>
+            )}
             <Input
               style={inputBottomMargin}
               name='gender'
@@ -92,7 +103,9 @@ class AddStudentForm extends Component {
               placeholder='Gender. E.g Male or Female'
               value={values.gender}
             />
-            {errors.gender && touched.gender && errors.gender}
+            {errors.gender && touched.gender && (
+              <Tag style={tagStyle}>{errors.gender}</Tag>
+            )}
             <Button type='submit' disabled={isSubmitting}>
               Submit
             </Button>
