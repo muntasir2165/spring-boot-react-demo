@@ -95,6 +95,7 @@ class App extends Component {
             columns={columns}
             pagination={false}
             rowKey='studentId'
+            style={{ paddingBottom: '100px' }}
           />
           <Modal
             title='Add new student'
