@@ -29,12 +29,18 @@ class App extends Component {
 
   fetchStudents = () => {
     this.setState({ isFetching: true });
-    getAllStudents().then((res) =>
-      res.json().then((students) => {
-        console.log(students);
-        this.setState({ isFetching: false, students });
-      })
-    );
+    getAllStudents()
+      .then((res) =>
+        res.json().then((students) => {
+          console.log(students);
+          this.setState({ isFetching: false, students });
+        })
+      )
+      .catch((error) => {
+        // console.log(error.error.message); // console logs an empty string - "". Hence, I commented it out and console logged error.response.statusText in the following line
+        console.log(error.response.statusText);
+        this.setState({ isFetching: false });
+      });
   };
 
   render() {
