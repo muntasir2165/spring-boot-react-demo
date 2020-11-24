@@ -4,6 +4,7 @@ import Footer from './Footer';
 import AddStudentForm from './forms/AddStudentForm';
 import './App.css';
 import { getAllStudents } from './client';
+import { errorNotification } from './Notification';
 import { Avatar, Modal, Spin, Table } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
@@ -38,7 +39,10 @@ class App extends Component {
       )
       .catch((error) => {
         // console.log(error.error.message); // console logs an empty string - "". Hence, I commented it out and console logged error.response.statusText in the following line
-        console.log(error.response.statusText);
+        console.log(error.error);
+        const message = error.response.statusText;
+        const description = error.response.statusText;
+        errorNotification(message, description);
         this.setState({ isFetching: false });
       });
   };
