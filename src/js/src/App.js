@@ -5,7 +5,7 @@ import AddStudentForm from './forms/AddStudentForm';
 import './App.css';
 import { getAllStudents } from './client';
 import { errorNotification } from './Notification';
-import { Avatar, Modal, Spin, Table } from 'antd';
+import { Avatar, Empty, Modal, Spin, Table } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
 const getIndicatorIcon = () => (
@@ -39,7 +39,7 @@ class App extends Component {
       )
       .catch((error) => {
         // console.log(error.error.message); // console logs an empty string - "". Hence, I commented it out and console logged error.response.statusText in the following line
-        console.log(error.error);
+        // console.log(error.error);
         const message = error.response.statusText;
         const description = error.response.statusText;
         errorNotification(message, description);
@@ -49,6 +49,28 @@ class App extends Component {
 
   render() {
     const { isAddStudentModalVisible, isFetching, students } = this.state;
+    const commonElements = () => (
+      <div>
+        <Modal
+          title='Add new student'
+          visible={isAddStudentModalVisible}
+          onOk={this.closeAddStudentModal}
+          onCancel={this.closeAddStudentModal}
+          width={1000}
+        >
+          <AddStudentForm
+            onSuccess={() => {
+              this.closeAddStudentModal();
+              this.fetchStudents();
+            }}
+          />
+        </Modal>
+        <Footer
+          numberOfStudents={students.length}
+          handleAddStudentClickEvent={this.openAddStudentModal}
+        />
+      </div>
+    );
 
     if (isFetching) {
       return (
@@ -107,29 +129,17 @@ class App extends Component {
             rowKey='studentId'
             style={{ paddingBottom: '100px' }}
           />
-          <Modal
-            title='Add new student'
-            visible={isAddStudentModalVisible}
-            onOk={this.closeAddStudentModal}
-            onCancel={this.closeAddStudentModal}
-            width={1000}
-          >
-            <AddStudentForm
-              onSuccess={() => {
-                this.closeAddStudentModal();
-                this.fetchStudents();
-              }}
-            />
-          </Modal>
-          <Footer
-            numberOfStudents={students.length}
-            handleAddStudentClickEvent={this.openAddStudentModal}
-          />
+          {commonElements()}
         </Container>
       );
     }
 
-    return <h1>No Students Found</h1>;
+    return (
+      <Container>
+        <Empty description={<h1>No Students Found</h1>} />
+        {commonElements()}
+      </Container>
+    );
   }
 }
 
