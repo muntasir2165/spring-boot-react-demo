@@ -38,6 +38,7 @@ class App extends Component {
         })
       )
       .catch((error) => {
+        console.log(error);
         // console.log(error.error.message); // console logs an empty string - "". Hence, I commented it out and console logged error.response.statusText in the following line
         // console.log(error.error);
         const message = error.response.statusText;
