@@ -38,11 +38,9 @@ class App extends Component {
         })
       )
       .catch((error) => {
-        console.log(error);
-        // console.log(error.error.message); // console logs an empty string - "". Hence, I commented it out and console logged error.response.statusText in the following line
-        // console.log(error.error);
-        const message = error.response.statusText;
-        const description = error.response.statusText;
+        console.log(error.error);
+        const message = error.error.message;
+        const description = error.error.error;
         errorNotification(message, description);
         this.setState({ isFetching: false });
       });
@@ -63,6 +61,11 @@ class App extends Component {
             onSuccess={() => {
               this.closeAddStudentModal();
               this.fetchStudents();
+            }}
+            onFailure={(error) => {
+              const message = error.error.message;
+              const description = error.error.httpStatus;
+              errorNotification(message, description);
             }}
           />
         </Modal>
